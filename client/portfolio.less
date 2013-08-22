@@ -1,0 +1,144 @@
+/* CSS declarations go here */
+
+/* global mixins */
+.centered { margin: 0 auto; text-align: center; display: block; }
+.allpage { top: 0; right: 0; bottom: 0; left: 0; }
+.transparent-bck (@opacity, @color) {
+	/* Fallback for web browsers that doesn't support RGBa */
+	background: rgb(@color,@color,@color);
+	/* RGBa with 0.6 opacity */
+	background: rgba(@color,@color,@color, @opacity);	
+}
+.invisible { 
+	visibility: hidden;
+	opacity: 0;
+    -webkit-transition: all .25s ease;
+       -moz-transition: all .25s ease;
+        -ms-transition: all .25s ease;
+         -o-transition: all .25s ease;
+            transition: all .25s ease;		
+}
+
+.visible { 
+	visibility: visible;
+	opacity: 1;
+}
+
+.border-radius(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
+	-webkit-border-top-right-radius : @topright;
+	-webkit-border-bottom-right-radius : @bottomright;
+	-webkit-border-bottom-left-radius : @bottomleft;
+	-webkit-border-top-left-radius : @topleft;
+	-moz-border-radius-topright : @topright;
+	-moz-border-radius-bottomright : @bottomright;
+	-moz-border-radius-bottomleft : @bottomleft;
+	-moz-border-radius-topleft : @topleft;
+	border-top-right-radius : @topright;
+	border-bottom-right-radius : @bottomright;
+	border-bottom-left-radius : @bottomleft;
+	border-top-left-radius : @topleft;
+	-webkit-background-clip : padding-box;
+	-moz-background-clip : padding;
+	background-clip : padding-box; 
+}
+
+
+body{ background-color: #383737 ; position: relative; }
+body * { font-family: 'Lato', sans-serif; font-weight: 300; }
+a {text-decoration: none; color: white; }
+a:link {text-decoration: none; color: white; }
+a:hover { color: white; }
+a:active { color: #aeaeae; }
+
+.wrapper { width: 98%; .centered; margin-top: 20px; overflow: hidden; position: relative;
+	-moz-box-shadow: 0px 0px 20px 0px #141414;
+	-webkit-box-shadow: 0px 0px 20px 0px #141414;
+	-o-box-shadow: 0px 0px 20px 0px #141414;
+	box-shadow: 0px 0px 20px 0px #141414;
+	background-color: black;
+}
+
+#col1 {	width: 42%; }
+#col2 {	width: 32%; }
+#col3 {	width: 26%; }
+
+
+.menu {
+	position: fixed; top: 80px; left: 80px; z-index: 2000;
+	width: 200px;
+	text-align: center;	
+	.logotype {
+		font-size: 2em; 
+		line-height: 1.13em;
+		color: white; 
+	}
+
+	.menu-list {
+		.centered;
+		width: 35px; height: 22px;
+		margin-top: 30px; margin-bottom: 30px;
+		&:hover { cursor: pointer; cursor: hand; }
+	}		
+	#dropdown {
+		.invisible;
+		.menu-arrow {
+		    position: absolute;
+		    width: 0;
+		    height: 0;
+		    left: 50%;
+		    margin-left: -15px;
+		    margin-top: -15px;
+		    border-left: 15px solid transparent;
+		    border-right: 15px solid transparent;
+		    border-bottom: 15px solid rgba(255,255,255, 0.1);;
+		}		
+		.menu-outer {
+			.centered; .transparent-bck (0.1, 255);
+			.border-radius(12px,12px,12px,12px);
+			padding: 0 10px 35px 10px;
+			.menu-title { color: #aeaeae; font-size: 1.6em; line-height: 35px; }
+			ul { margin: 0; padding: 12px 0 12px 0; }
+			li { 
+				list-style-type: none;
+				line-height: 40px;
+				&:hover { .transparent-bck (0.072, 255); }
+				a { display: block; }
+			}
+			nav { 
+				.transparent-bck (0.6, 1);
+				.border-radius(12px,12px,12px,12px);
+			}
+		}			
+	}
+
+	#dropdown.active {
+		.visible ;
+	}
+}
+
+.container { 
+	float: left; 
+	img { width: 100%; display: block; }
+	.coveritem { 
+		width: 100%; position: relative; 
+	}
+}
+
+.carousel-outer {
+	position: fixed; .allpage ;
+	z-index: 1080;
+	.transparent-bck (0.85, 0);
+	.close { position: fixed; .allpage ; }
+}
+
+.carouselWrapper { 
+	margin-top: 100px; width: 800px; 
+	position: relative; 
+	* { position: relative; }	
+	.carousel-control 		{ margin-top: -100px; position: fixed; border: 0; background: none; font-size: 9em; } /* overrides bootstrap */
+	.carousel 				{ position: absolute; width: 100%; }
+	.item 					{ height: 800px; }
+	.item img				{ margin: 0 auto; display: block; } 	
+}	
+
+

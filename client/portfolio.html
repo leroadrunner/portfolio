@@ -1,0 +1,71 @@
+<head>
+  <title>portfolio</title>
+  <link href='http://fonts.googleapis.com/css?family=Nova+Round|Noto+Sans|Lato:100,300,400|Cabin|Armata|Ubuntu:300,400|Josefin+Sans:100,300,400|Muli:300|Carrois+Gothic+SC|Oxygen:300|Raleway:100' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+	<div class="wrapper">
+		{{> coverPage}}	
+	</div>
+	{{> carousel}}		
+	<div class="menu">
+		{{> albumsList}}
+	</div>	
+</body>
+
+<template name="coverPage">
+	{{#each container}}
+		<div class="container" id="{{name}}">
+			{{#each files}}
+				<div class="coveritem">
+				   <img alt="" src="albums/{{path}}/{{picture}}">
+				</div>
+			{{/each}}		
+		</div>	
+	{{/each}}
+</template>
+
+<template name="albumsList">
+	<a class="logotype" href="http://192.168.1.3:3000">RONALD<br>PAUFFERT</a> 
+	<img class="menu-list" alt="menu-list" src="menu.png">	
+	<div id="dropdown">
+		<div class="menu-arrow"></div>
+		<div class="menu-outer">
+			<div class="menu-title">series</div>
+			<nav>
+				<ul>
+					{{#each albums}}
+						<li>
+							<a class="menu-item" href="http://192.168.1.3:3000/{{title}}">{{title}}</a>	
+						</li>
+					{{/each}}		
+				</ul>	
+			</nav>				
+		</div>				
+	</div>
+
+</template>
+
+<template name="carousel">
+	{{#if carouselState}}
+		<div class="carousel-outer">
+			<a class="close"></a>
+			<div class="carouselWrapper centered">
+			    <div id="myCarousel" class="carousel slide">
+					<div class="carousel-inner">
+					<!-- Carousel items -->  	
+						{{#each pictures}}
+							<div class="item {{#if isFirst}}active{{/if}}">
+							   <img alt="" src="albums/{{path}}/{{fileName}}">
+							</div>
+						{{/each}}
+					</div>
+				    <!-- Carousel nav -->
+				    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+				    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+			    </div>  		
+			</div>	
+		</div>
+    {{/if}}
+
+</template>
