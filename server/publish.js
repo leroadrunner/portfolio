@@ -2,10 +2,10 @@ Pictures = new Meteor.Collection("pictures");
 Albums = new Meteor.Collection("albums");
 var columns = 3;
 var identifier = "col";
-var imagesDirectory = "/srv/incoming/work/meteorjs/portfolio/public/albums";  
-var beginByIdentifier = "^"+identifier+"[0-9]";
 
 Meteor.startup(function () {
+  var imagesDirectory = "../client/app/albums";  
+  var beginByIdentifier = "^"+identifier+"[0-9]";
   function recordPictures(albumDirectory) {
     var pictures = fs.readdirSync(imagesDirectory + "/" + albumDirectory);
     for (var i = 0; i < pictures.length; i++) {
@@ -24,3 +24,5 @@ Meteor.startup(function () {
     Albums.insert({ title: albumDirectory[i], url: albumUrl }); // workaround since there's no Collection.find({}).distinct('myField', true);
   }   
 });
+
+
