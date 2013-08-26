@@ -1,5 +1,5 @@
-Pictures = new Meteor.Collection("pictures");
-Albums = new Meteor.Collection("albums");
+var Pictures = new Meteor.Collection("pictures");
+var Albums = new Meteor.Collection("albums");
 var sinterval = 3000  ;
 var columns = 3;
 var identifier = "col";
@@ -15,7 +15,7 @@ function collectionExtract(collection) {
   return result;  
 }  
 
-// setup
+// setup ( google analytics )
 Template.setup.rendered = function() {
   (function (i, s, o, g, r, a, m) {
       i['GoogleAnalyticsObject'] = r;
@@ -35,7 +35,7 @@ Template.setup.rendered = function() {
 // coverPage
 Template.coverPage.container = function () {
   var cover = [];    
-  for (i=1; i<=columns; i++) {
+  for (var i=1; i<=columns; i++) {
     var column = Pictures.find({column: identifier+i}, { sort: {fileName: 1}}).fetch();
     var colExtract = collectionExtract(column);
     cover.push({name: identifier+i, files: colExtract});  
