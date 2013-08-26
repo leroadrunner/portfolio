@@ -1,8 +1,8 @@
 var Pictures = new Meteor.Collection("pictures");
 var Albums = new Meteor.Collection("albums");
-var sinterval = 3000  ;
-var columns = 3;
-var identifier = "col";
+var INTERVAL = 3000  ;
+var NB_COLUMNS = 3;
+var IDENTIFIER = "col";
 Session.setDefault('currentPage', 'UnderTheBridge');
 Session.setDefault('carouselState', false);
 Session.setDefault('menuState', false);
@@ -35,10 +35,10 @@ Template.setup.rendered = function() {
 // coverPage
 Template.coverPage.container = function () {
   var cover = [];    
-  for (var i=1; i<=columns; i++) {
-    var column = Pictures.find({column: identifier+i}, { sort: {fileName: 1}}).fetch();
+  for (var i=1; i<=NB_COLUMNS; i++) {
+    var column = Pictures.find({column: IDENTIFIER+i}, { sort: {fileName: 1}}).fetch();
     var colExtract = collectionExtract(column);
-    cover.push({name: identifier+i, files: colExtract});  
+    cover.push({name: IDENTIFIER+i, files: colExtract});  
   }       
   return cover;
 };  
@@ -77,7 +77,7 @@ Template.carousel.carouselState = function () {
 Template.carousel.rendered = function () {
   $(document).ready(function(){
     $('.carousel').carousel({
-      interval : sinterval
+      interval : INTERVAL
     });
   });  
 };
