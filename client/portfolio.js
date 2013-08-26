@@ -36,9 +36,10 @@ Template.setup.rendered = function() {
 Template.coverPage.container = function () {
   var cover = [];    
   for (var i=1; i<=NB_COLUMNS; i++) {
-    var column = Pictures.find({column: IDENTIFIER+i}, { sort: {fileName: 1}}).fetch();
+    var id = IDENTIFIER+i;
+    var column = Pictures.find({column: id}, { sort: {fileName: 1}}).fetch();
     var colExtract = collectionExtract(column);
-    cover.push({name: IDENTIFIER+i, files: colExtract});  
+    cover.push({name: id, files: colExtract});  
   }       
   return cover;
 };  
