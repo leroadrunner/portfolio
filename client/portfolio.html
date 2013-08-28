@@ -1,6 +1,6 @@
 <head>
   <title>portfolio</title>
-  <link href='http://fonts.googleapis.com/css?family=Nova+Round|Noto+Sans|Lato:100,300,400|Cabin|Armata|Ubuntu:300,400|Josefin+Sans:100,300,400|Muli:300|Carrois+Gothic+SC|Oxygen:300|Raleway:100' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -28,7 +28,7 @@
 
 <template name="albumsList">
 	<a class="logotype" href="/">RONALD<br>PAUFFERT</a> 
-	<img class="menu-list" alt="menu-list" src="menu.png">	
+	<img class="menu-icon" alt="menu-icon" src="menu.png">	
 	<div id="dropdown">
 		<div class="menu-arrow"></div>
 		<div class="menu-outer">
@@ -44,15 +44,14 @@
 			</nav>				
 		</div>				
 	</div>
-
 </template>
 
 <template name="carousel">
 	{{#if carouselState}}
 		<div class="carousel-outer">
 			<a class="close"></a>
-			<div class="carouselWrapper centered">
-			    <div id="myCarousel" class="carousel slide">
+			<div class="carousel-wrapper centered">
+			    <div id="my-carousel" class="carousel slide">
 					<div class="carousel-inner">
 					<!-- Carousel items -->  	
 						{{#each pictures}}
@@ -62,12 +61,12 @@
 						{{/each}}
 					</div>
 				    <!-- Carousel nav -->
-				    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-				    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+				    <a class="carousel-control left" href="#my-carousel" data-slide="prev">&lsaquo;</a>
+				    <a class="carousel-control right" href="#my-carousel" data-slide="next">&rsaquo;</a>
 			    </div>  		
 			</div>	
 		</div>
     {{/if}}
 </template>
  
-<template name="setup"></template>
+<template name="googleAnalytics"></template>
