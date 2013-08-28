@@ -6,6 +6,7 @@ var IDENTIFIER = "col";
 Session.setDefault('currentPage', 'UnderTheBridge');
 Session.setDefault('carouselState', false);
 Session.setDefault('menuState', false);
+Session.setDefault('carouselIndex', 0);
 
 function collectionExtract(collection) {
   var result = [];  
@@ -46,6 +47,13 @@ Template.coverPage.pictures = function () {
   return Pictures.find({cover: selector }, {sort: { fileName: 1}}) ;
 };
 
+Template.coverPage.events({
+  'click .coveritem': function (evt) {
+    Router.setCoverAlbum(this.path,this.index); 
+    console.log(this.index);
+  }
+});
+
 // albumsList
 Template.albumsList.albums = function () {
   return Albums.find({}, {sort: { title: 1}}) ;
@@ -53,8 +61,6 @@ Template.albumsList.albums = function () {
 
 Template.albumsList.events({
   'click .menu-list': function (evt) {
-    // prevent clicks on <a> from refreshing the page.
-    evt.preventDefault();
     var menuState = Session.get('menuState');
     if (menuState) {
       Session.set('menuState', false);
@@ -78,16 +84,19 @@ Template.carousel.carouselState = function () {
 };
 
 Template.carousel.rendered = function () {
+  var carouselIndex = Session.get('carouselIndex');  
   $(document).ready(function(){
     $('.carousel').carousel({
       interval : INTERVAL
     });
+    $('.carousel').carousel(carouselIndex);
   });  
+  $('#'+carouselIndex).parent().addClass( 'active' );
 };
 
 Template.carousel.pictures = function () {
   var AlbumSes = Session.get('currentPage');
-  return Pictures.find({path: AlbumSes}, {sort: { fileName: 1}}) ;
+  return Pictures.find({path: AlbumSes}, {sort: { index: 1}}) ;
 };
 
 Template.carousel.events({

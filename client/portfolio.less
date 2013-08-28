@@ -118,10 +118,8 @@ a:active { color: #aeaeae; }
 
 .container { 
 	float: left; 
-	img { width: 100%; display: block; }
-	.coveritem { 
-		width: 100%; position: relative; 
-	}
+	img { width: 100%; display: block; &:hover { opacity: 0.95; cursor: pointer; cursor: hand; } }
+	.coveritem { width: 100%; position: relative; background-color: #e6e6e6; }
 }
 
 .carousel-outer {

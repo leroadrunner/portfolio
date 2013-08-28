@@ -14,7 +14,7 @@ Meteor.startup(function () {
     var pictures = fs.readdirSync(imagesDirectory + "/" + albumDirectory);
     for (var i = 0; i < pictures.length; i++) {
       var cover = pictures[i].match(beginByIdentifier) || {} ;
-      Pictures.insert({ fileName: pictures[i], path: albumDirectory, cover: cover[0], isFirst: i === 0 });
+      Pictures.insert({ fileName: pictures[i], path: albumDirectory, cover: cover[0],  index: i });
     }      
   }
   for (var i = 0; i < albumDirectory.length; i++) {

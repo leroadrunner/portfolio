@@ -8,7 +8,13 @@ var PortfolioRouter = Backbone.Router.extend({
     this.navigate(album_title, true);
     Session.set('currentPage', album_title);
     Session.set('carouselState', true);
-  },   
+  },
+  setCoverAlbum: function (album_title,index) {
+    this.navigate(album_title, true);
+    Session.set('currentPage', album_title);
+    Session.set('carouselState', true);
+    Session.set('carouselIndex', index);
+  },      
   unsetAlbum: function () {
     this.navigate('/', true);
     Session.set('carouselState', false);
