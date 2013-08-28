@@ -4,12 +4,7 @@ var PortfolioRouter = Backbone.Router.extend({
   routes: {
     ":album_title": "setAlbum"
   },
-  setAlbum: function (album_title) {
-    this.navigate(album_title, true);
-    Session.set('currentPage', album_title);
-    Session.set('carouselState', true);
-  },
-  setCoverAlbum: function (album_title,index) {
+  setAlbum: function (album_title,index) {
     this.navigate(album_title, true);
     Session.set('currentPage', album_title);
     Session.set('carouselState', true);

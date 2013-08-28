@@ -17,7 +17,7 @@ function collectionExtract(collection) {
 }  
 
 // setup ( google analytics )
-Template.setup.rendered = function() {
+Template.googleAnalytics.rendered = function() {
   (function (i, s, o, g, r, a, m) {
       i['GoogleAnalyticsObject'] = r;
       i[r] = i[r] || function () {
@@ -49,7 +49,7 @@ Template.coverPage.pictures = function () {
 
 Template.coverPage.events({
   'click .coveritem': function (evt) {
-    Router.setCoverAlbum(this.path,this.index); 
+    Router.setAlbum(this.path,this.index); 
     console.log(this.index);
   }
 });
@@ -73,7 +73,7 @@ Template.albumsList.events({
   'click .menu-item': function (evt) {
     // prevent clicks on <a> from refreshing the page.
     evt.preventDefault();
-    Router.setAlbum(this.title); 
+    Router.setAlbum(this.title,0); 
   }
 });
 
