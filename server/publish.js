@@ -1,23 +1,22 @@
 Pictures = new Meteor.Collection("pictures");
 Albums = new Meteor.Collection("albums");
-var columns = 3;
-var identifier = "col";
+var IDENTIFIER = "col";
 
 Meteor.startup(function () {
   var imagesDirectory = "../client/app/albums";  
-  var beginByIdentifier = "^"+identifier+"[0-9]";
+  var beginByIdentifier = "^"+IDENTIFIER+"[0-9]";
+  var fs = Npm.require('fs');
+  var prettyUrl = new URLify;
+  var albumDirectory = fs.readdirSync(imagesDirectory);  
+  Pictures.remove({});
+  Albums.remove({});  
   function recordPictures(albumDirectory) {
     var pictures = fs.readdirSync(imagesDirectory + "/" + albumDirectory);
     for (var i = 0; i < pictures.length; i++) {
-      var column = pictures[i].match(beginByIdentifier) || {} ;
-      Pictures.insert({ fileName: pictures[i], path: albumDirectory, column: column[0], isFirst: i === 0 });
+      var cover = pictures[i].match(beginByIdentifier) || {} ;
+      Pictures.insert({ fileName: pictures[i], path: albumDirectory, cover: cover[0], isFirst: i === 0 });
     }      
   }
-  Pictures.remove({});
-  Albums.remove({});
-  var fs = Npm.require('fs');
-  var prettyUrl = new URLify;
-  var albumDirectory = fs.readdirSync(imagesDirectory);
   for (var i = 0; i < albumDirectory.length; i++) {
     recordPictures(albumDirectory[i]);
     albumUrl = prettyUrl.generate(albumDirectory[i]);

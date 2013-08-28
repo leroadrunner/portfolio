@@ -1,5 +1,5 @@
-var Pictures = new Meteor.Collection("pictures");
-var Albums = new Meteor.Collection("albums");
+Pictures = new Meteor.Collection("pictures");
+Albums = new Meteor.Collection("albums");
 var INTERVAL = 3000  ;
 var NB_COLUMNS = 3;
 var IDENTIFIER = "col";
@@ -34,15 +34,17 @@ Template.setup.rendered = function() {
 
 // coverPage
 Template.coverPage.container = function () {
-  var cover = [];    
+  var container = [];    
   for (var i=1; i<=NB_COLUMNS; i++) {
-    var id = IDENTIFIER+i;
-    var column = Pictures.find({column: id}, { sort: {fileName: 1}}).fetch();
-    var colExtract = collectionExtract(column);
-    cover.push({name: id, files: colExtract});  
+    container.push(IDENTIFIER+i) 
   }       
-  return cover;
-};  
+  return container;
+}; 
+
+Template.coverPage.pictures = function () {
+  var selector = this.toString();
+  return Pictures.find({cover: selector }, {sort: { fileName: 1}}) ;
+};
 
 // albumsList
 Template.albumsList.albums = function () {
