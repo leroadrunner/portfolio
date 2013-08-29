@@ -1,20 +1,21 @@
-Pictures = new Meteor.Collection("pictures");
-Albums = new Meteor.Collection("albums");
-var IDENTIFIER = "col";
+Pictures        = new Meteor.Collection("pictures");
+Albums          = new Meteor.Collection("albums");
+var IDENTIFIER  = "col";
+var IMAGE_DIR   = "../client/app/albums";  
 
 Meteor.startup(function () {
-  var imagesDirectory         = "../client/app/albums";  
+
   var beginByIdentifier       = "^"+IDENTIFIER+"[0-9]";
   var fs                      = Npm.require('fs');
   var prettyUrl               = new URLify;
-  var albumDirectory          = fs.readdirSync(imagesDirectory);  
+  var albumDirectory          = fs.readdirSync(IMAGE_DIR);  
 
   // clean the DB and scan the directory for new pics
   Pictures.remove({});
   Albums.remove({});  
 
   function recordPictures(albumDirectory,albumUrl) {
-    var pictures = fs.readdirSync(imagesDirectory + "/" + albumDirectory);
+    var pictures = fs.readdirSync(IMAGE_DIR + "/" + albumDirectory);
     pictures.forEach(function(picture, index) {
       Pictures.insert({ 
         fileName: picture, 
@@ -25,15 +26,17 @@ Meteor.startup(function () {
       });
     });         
   }
-  for (var i = 0; i < albumDirectory.length; i++) {
-    albumUrl = prettyUrl.generate(albumDirectory[i]);
-    recordPictures(albumDirectory[i],albumUrl);
+
+  albumDirectory.forEach(function(album) {
+    albumUrl = prettyUrl.generate(album);
+    recordPictures(album,albumUrl);
     // build album list for the menu
     Albums.insert({ 
-      title: albumDirectory[i], 
+      title: album, 
       url: albumUrl 
-    }); // workaround since there's no Collection.find({}).distinct('myField', true);
-  }   
+    }); // workaround since there's no Collection.find({}).distinct('myField', true);    
+  });
+
 });
 
 
